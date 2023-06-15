@@ -1,64 +1,82 @@
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import Grid from "@mui/material/Unstable_Grid2";
+import Stack from "@mui/material/Stack";
+import numeral from "numeral";
 
 import { Item } from "../../redux/productsSlice/types";
 
-export const ProductItem = () => {
+export const ProductItem = ({
+  id,
+  productName,
+  description,
+  category,
+  unitPrice,
+  imageUrl,
+}: Item) => {
   return (
-    <Card sx={{ display: "flex" }}>
-      <CardMedia
-        component="img"
-        sx={{ width: 200 }}
-        image="https://assetbucketdevelopment.blob.core.windows.net/testing/38572723316446256-4502091711_4306188427186_01.jpg.jpg"
-        alt="Live from space album cover"
+    <Card
+      sx={{
+        display: "flex",
+        my: 4,
+      }}
+      key={id}
+    >
+      <img
+        style={{
+          width: 200,
+          objectFit: "contain",
+          padding: 10,
+        }}
+        src={imageUrl}
       />
-      <Box sx={{ display: "flex", flexDirection: "row" }}>
-        <Box sx={{ display: "flex", flexDirection: "column" }}>
-          <CardContent sx={{ flex: "1 0 auto" }}>
-            <Typography component="div" variant="h5">
-              Elecap buwzabih pil onebi
-            </Typography>
-            <Typography
-              variant="subtitle1"
-              color="text.secondary"
-              component="div"
-            >
-              Category 1
-            </Typography>
-          </CardContent>
-          <Box sx={{ display: "flex", alignItems: "center", pl: 2, pb: 1 }}>
-            <Typography>
-              Otpauwo kuhsu bolug sefbiuda edodet zub wi ko dieka ro wub
-              gefmejog. Huaf wo vi keherfum se iruverhoc di wo mimitzad ziztahig
-              bobusoru nutbac maj mawhusom bosorke. Pevomav lu leir nijocru
-              laheh huvi adu ga isu fos ekfij gibvo vimfo.
-            </Typography>
+
+      <Grid container spacing={2} sx={{ width: "100%" }}>
+        <Grid xs={9}>
+          <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <CardContent>
+              <Typography component="div" variant="h5">
+                {productName}
+              </Typography>
+              <Typography
+                variant="subtitle1"
+                color="text.secondary"
+                component="div"
+              >
+                {category}
+              </Typography>
+            </CardContent>
+            <Box sx={{ pl: 2, pb: 1 }}>
+              <Typography>{description}</Typography>
+            </Box>
           </Box>
-        </Box>
-        <Box
-          sx={{
-            width: 400,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-          }}
-        >
-          <Typography
-            component="div"
-            variant="h5"
-            sx={{ textAlign: "center", marginTop: 3 }}
-          >
-            123123
-          </Typography>
-          <Button variant="contained" sx={{ margin: 2 }}>
-            Add to cart
-          </Button>
-        </Box>
-      </Box>
+        </Grid>
+        <Grid xs={3}>
+          <Stack justifyContent="center" alignItems="center" height="100%">
+            <Stack
+              sx={{
+                width: "100%",
+                flexDirection: "column",
+                justifyContent: "center",
+              }}
+            >
+              <Typography
+                component="div"
+                variant="h5"
+                sx={{ textAlign: "center", marginTop: 3 }}
+              >
+                ₱ {numeral(unitPrice).format("0,0.00")}
+              </Typography>
+              <Button variant="contained" sx={{ margin: 2 }}>
+                Add to cart
+              </Button>
+            </Stack>
+          </Stack>
+        </Grid>
+      </Grid>
     </Card>
   );
 };

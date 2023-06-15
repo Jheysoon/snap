@@ -3,8 +3,13 @@ import Grid from "@mui/material/Unstable_Grid2";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import { useAppSelector } from "../../redux/hooks";
+
+import { Item } from "../../redux/productsSlice/types";
 
 export const Home = () => {
+  const { list } = useAppSelector((state) => state.product);
+
   return (
     <Box
       component="main"
@@ -15,8 +20,9 @@ export const Home = () => {
         <Grid xs={9}>
           <Box sx={{ mx: 8 }}>
             <SearchTextField />
-
-            <ProductItem />
+            {list.map((product: Item) => (
+              <ProductItem key={product.id} {...product} />
+            ))}
           </Box>
         </Grid>
         <Grid xs={3}>
