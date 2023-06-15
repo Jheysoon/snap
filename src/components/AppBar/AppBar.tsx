@@ -5,8 +5,11 @@ import Container from "@mui/material/Container";
 
 export const AppBar = () => {
   return (
-    <MUIAppBar position="static">
-      <Container maxWidth="xl">
+    <MUIAppBar
+      position="fixed"
+      sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+    >
+      <Container>
         <Toolbar disableGutters>
           <Typography
             variant="h6"
