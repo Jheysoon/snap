@@ -1,33 +1,22 @@
-import { AppBar, AppDrawer } from "./components";
+import { AppBar, AppDrawer, SearchTextField } from "./components";
 import Grid from "@mui/material/Unstable_Grid2";
 import Box from "@mui/material/Box";
 import { useAppSelector } from "./redux/hooks";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import { Home } from "./pages/Home";
 
 function App() {
-  const products = useAppSelector((state) => state.product);
+  const { list } = useAppSelector((state) => state.product);
 
   console.log("products ####");
-  console.log(products);
+  console.log(list);
   return (
-    <>
+    <Box sx={{ display: "flex" }}>
       <AppBar />
-
       <AppDrawer />
-
-      <Box>
-        <Grid container>
-          <Grid xs={3}>
-            <div>xs=4</div>
-          </Grid>
-          <Grid xs={6}>
-            <div>xs=8</div>
-          </Grid>
-          <Grid xs={3}>
-            <div>xs=4</div>
-          </Grid>
-        </Grid>
-      </Box>
-    </>
+      <Home />
+    </Box>
   );
 }
 
