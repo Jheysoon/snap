@@ -1,4 +1,4 @@
-import { SearchTextField } from "../../components";
+import { SearchTextField, ProductItem } from "../../components";
 import Grid from "@mui/material/Unstable_Grid2";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -15,6 +15,8 @@ export const Home = () => {
         <Grid xs={9}>
           <Box sx={{ mx: 8 }}>
             <SearchTextField />
+
+            <ProductItem />
           </Box>
         </Grid>
         <Grid xs={3}>

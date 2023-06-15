@@ -1,9 +1,6 @@
-import { AppBar, AppDrawer, SearchTextField } from "./components";
-import Grid from "@mui/material/Unstable_Grid2";
+import { AppBar, AppDrawer } from "./components";
 import Box from "@mui/material/Box";
 import { useAppSelector } from "./redux/hooks";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import { Home } from "./pages/Home";
 
 function App() {
