@@ -1,10 +1,10 @@
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import storage from "redux-persist/lib/storage";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
 
-import product from "./productsSlice/slice";
 import cart from "./cartSlice/slice";
+import product from "./productsSlice/slice";
 
 const persistConfig = {
   key: "root",

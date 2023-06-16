@@ -3,40 +3,16 @@ import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
 
-import Fuse from "fuse.js";
-import products from "../../assets/items.json";
+import searchAndFilter from "../../actions/searchAndFilter";
 import { useAppDispatch } from "../../redux/hooks";
-import { setProducts } from "../../redux/productsSlice/slice";
-import { Item } from "../../types/item";
 
 export const SearchTextField = () => {
   const dispatch = useAppDispatch();
   const [search, setSearch] = useState<string | null>(null);
 
-  // @TODO move this logic
   useEffect(() => {
-    if (search === "") {
-      dispatch(setProducts(products));
-      return;
-    }
-
-    if (search !== "" && search !== null) {
-      //
-      const options = {
-        useExtendedSearch: true,
-        keys: ["productName"],
-      };
-
-      const fuse = new Fuse(products, options);
-      const results = fuse.search(`^${search}`);
-
-      const list: Item[] = [];
-      results.forEach((result) => {
-        list.push(result.item);
-      });
-
-      dispatch(setProducts(list));
-    }
+    // @ts-ignore
+    dispatch(searchAndFilter(search));
   }, [search, dispatch]);
 
   return (

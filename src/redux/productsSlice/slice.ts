@@ -10,9 +10,12 @@ const productsSlice = createSlice({
     setProducts: (state, action: PayloadAction<Item[]>) => {
       state.list = action.payload;
     },
+    setCategory: (state, action: PayloadAction<string>) => {
+      state.filters.category = action.payload;
+    },
     resetList: () => INITIAL_STATE,
   },
 });
 
-export const { setProducts, resetList } = productsSlice.actions;
+export const { setProducts, resetList, setCategory } = productsSlice.actions;
 export default productsSlice;
