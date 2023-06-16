@@ -13,12 +13,19 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 
 import { useAppSelector } from "../../redux/hooks";
-import { Item } from "../../types/item";
+import { CartItem } from "../../types/cartItem";
+import { useAppDispatch } from "../../redux/hooks";
+import { resetCartList } from "../../redux/cartSlice/slice";
 
 const drawerWidth = 400;
 
 export const MyCart = () => {
   const { items } = useAppSelector((state) => state.cart);
+  const dispatch = useAppDispatch();
+
+  const handleClearCart = () => {
+    dispatch(resetCartList());
+  };
 
   return (
     <>
@@ -45,12 +52,12 @@ export const MyCart = () => {
             <Typography variant="h5" sx={{ textAlign: "center" }}>
               My Cart
             </Typography>
-            <Button variant="outlined" fullWidth>
+            <Button variant="outlined" fullWidth onClick={handleClearCart}>
               Clear Cart
             </Button>
           </Stack>
 
-          {items.map((item: Item, index) => (
+          {items.map((item: CartItem, index) => (
             <Box key={index}>
               <Button variant="contained" sx={{ marginBottom: -10 }}>
                 X
@@ -87,7 +94,7 @@ export const MyCart = () => {
                         </InputAdornment>
                       ),
                     }}
-                    value={1}
+                    value={item.quantity}
                     variant="outlined"
                     size="small"
                     sx={{ width: 130, textAlign: "center" }}

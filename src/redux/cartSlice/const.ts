@@ -1,7 +1,7 @@
-import { Item } from "../../types/item";
+import { CartItem } from "../../types/cartItem";
 
 type State = {
-  items: Item[];
+  items: CartItem[];
 };
 
 export const INITIAL_STATE: State = {

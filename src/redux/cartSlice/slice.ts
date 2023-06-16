@@ -2,13 +2,14 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { INITIAL_STATE } from "./const";
 import { Item } from "../../types/item";
+import { CartItem } from "../../types/cartItem";
 
 const cartSlice = createSlice({
   name: "cart",
   initialState: INITIAL_STATE,
   reducers: {
     addToCart: (state, action: PayloadAction<Item>) => {
-      const item: Item[] = [action.payload];
+      const item: CartItem[] = [{ quantity: 1, ...action.payload }];
 
       state.items.forEach((record) => {
         item.push(record);
@@ -16,9 +17,9 @@ const cartSlice = createSlice({
 
       state.items = item;
     },
-    resetList: () => INITIAL_STATE,
+    resetCartList: () => INITIAL_STATE,
   },
 });
 
-export const { addToCart, resetList } = cartSlice.actions;
+export const { addToCart, resetCartList } = cartSlice.actions;
 export default cartSlice;
