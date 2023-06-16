@@ -1,4 +1,4 @@
-import { AppBar, AppDrawer } from "./components";
+import { AppBar, AppDrawer, MyCart } from "./components";
 import Box from "@mui/material/Box";
 import { useAppSelector } from "./redux/hooks";
 import { Home } from "./pages/Home";
@@ -13,6 +13,7 @@ function App() {
       <AppBar />
       <AppDrawer />
       <Home />
+      <MyCart />
     </Box>
   );
 }
