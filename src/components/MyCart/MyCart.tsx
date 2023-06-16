@@ -60,25 +60,31 @@ export const MyCart = () => {
             <Typography variant="h5" sx={{ textAlign: "center" }}>
               My Cart
             </Typography>
-            <Button variant="outlined" fullWidth onClick={handleClearCart}>
-              Clear Cart
-            </Button>
+            {items.length > 0 && (
+              <Button variant="outlined" fullWidth onClick={handleClearCart}>
+                Clear Cart
+              </Button>
+            )}
           </Stack>
 
           {items.map((item: CartItem, index) => (
             <MyCartItem item={item} key={index} />
           ))}
 
-          <MyCartSubTotal />
+          {items.length > 0 && (
+            <>
+              <MyCartSubTotal />
 
-          <Button
-            variant="contained"
-            fullWidth
-            sx={{ px: 2 }}
-            onClick={handleOpenDialog}
-          >
-            Checkout
-          </Button>
+              <Button
+                variant="contained"
+                fullWidth
+                sx={{ px: 2 }}
+                onClick={handleOpenDialog}
+              >
+                Checkout
+              </Button>
+            </>
+          )}
         </Box>
       </Drawer>
     </>
