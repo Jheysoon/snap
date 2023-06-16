@@ -8,11 +8,9 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
 
-import { AnyAction } from "redux";
 import setCategoryAndFilter from "../../actions/setCategoryAndFilter";
 import products from "../../assets/items.json";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { setCategory } from "../../redux/productsSlice/slice";
 
 const drawerWidth = 240;
 
