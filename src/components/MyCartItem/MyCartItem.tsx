@@ -69,7 +69,9 @@ export const MyCartItem = ({ item }: Props) => {
         />
         <CardContent>
           <Typography>{item.productName}</Typography>
-          <Typography>₱ {numeral(item.unitPrice).format("0,0.00")}</Typography>
+          <Typography>
+            ₱ {numeral(item.unitPrice * item.quantity).format("0,0.00")}
+          </Typography>
           <TextField
             placeholder="Search Item"
             disabled
