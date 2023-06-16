@@ -1,13 +1,35 @@
-import { SearchTextField, ProductItem } from "../../components";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
 import Toolbar from "@mui/material/Toolbar";
-import { useAppSelector } from "../../redux/hooks";
+import { useMemo, useState } from "react";
 
+import { ProductItem, SearchTextField } from "../../components";
+import { useAppSelector } from "../../redux/hooks";
 import { Item } from "../../types/item";
 
 export const Home = () => {
+  const [sortedHighToLow, setSortedHighToLow] = useState<boolean>(false);
   const { list } = useAppSelector((state) => state.product);
+
+  const handleSorting = () => {
+    setSortedHighToLow(true);
+  };
+
+  const products = useMemo(() => {
+    if (sortedHighToLow === true) {
+      const items = [...list];
+
+      items.sort((a, b) => {
+        return b.unitPrice - a.unitPrice;
+      });
+
+      return items;
+    }
+
+    return list;
+  }, [list, sortedHighToLow]);
 
   return (
     <Box
@@ -19,7 +41,12 @@ export const Home = () => {
         <Grid item xs={12}>
           <Box sx={{ mx: 8 }}>
             <SearchTextField />
-            {list.map((product: Item) => (
+
+            <Stack flexDirection="row-reverse" sx={{ marginTop: 2 }}>
+              <Button onClick={handleSorting}>Sort price high to low</Button>
+            </Stack>
+
+            {products.map((product: Item) => (
               <ProductItem key={product.id} {...product} />
             ))}
           </Box>
