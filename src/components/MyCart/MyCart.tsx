@@ -12,9 +12,14 @@ import TextField from "@mui/material/TextField";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 
+import { useAppSelector } from "../../redux/hooks";
+import { Item } from "../../types/item";
+
 const drawerWidth = 400;
 
 export const MyCart = () => {
+  const { items } = useAppSelector((state) => state.cart);
+
   return (
     <>
       <Drawer
@@ -45,50 +50,52 @@ export const MyCart = () => {
             </Button>
           </Stack>
 
-          <Box>
-            <Button variant="contained" sx={{ marginBottom: -10 }}>
-              X
-            </Button>
-            <Card sx={{ margin: 1, display: "flex" }}>
-              <img
-                style={{
-                  height: 100,
-                  width: 100,
-                  objectFit: "contain",
-                  padding: 10,
-                }}
-                src="https://assetbucketdevelopment.blob.core.windows.net/testing/38572723316446256-4502091711_4306188427186_01.jpg.jpg"
-              />
-              <CardContent>
-                <Typography>Elecap buwzabih pil onebi.</Typography>
-                <Typography>100.00</Typography>
-                <TextField
-                  placeholder="Search Item"
-                  disabled
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <IconButton>
-                          <AddIcon />
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton>
-                          <RemoveIcon />
-                        </IconButton>
-                      </InputAdornment>
-                    ),
+          {items.map((item: Item, index) => (
+            <Box key={index}>
+              <Button variant="contained" sx={{ marginBottom: -10 }}>
+                X
+              </Button>
+              <Card sx={{ margin: 1, display: "flex" }}>
+                <img
+                  style={{
+                    height: 100,
+                    width: 100,
+                    objectFit: "contain",
+                    padding: 10,
                   }}
-                  value={1}
-                  variant="outlined"
-                  size="small"
-                  sx={{ width: 130, textAlign: "center" }}
+                  src={item.imageUrl}
                 />
-              </CardContent>
-            </Card>
-          </Box>
+                <CardContent>
+                  <Typography>{item.productName}</Typography>
+                  <Typography>{item.unitPrice}</Typography>
+                  <TextField
+                    placeholder="Search Item"
+                    disabled
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <IconButton>
+                            <AddIcon />
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton>
+                            <RemoveIcon />
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                    value={1}
+                    variant="outlined"
+                    size="small"
+                    sx={{ width: 130, textAlign: "center" }}
+                  />
+                </CardContent>
+              </Card>
+            </Box>
+          ))}
         </Box>
       </Drawer>
     </>

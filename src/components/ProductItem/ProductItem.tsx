@@ -7,16 +7,27 @@ import Grid from "@mui/material/Unstable_Grid2";
 import Stack from "@mui/material/Stack";
 import numeral from "numeral";
 
-import { Item } from "../../redux/productsSlice/types";
+import { Item } from "../../types/item";
+import { useAppDispatch } from "../../redux/hooks";
+import { addToCart } from "../../redux/cartSlice/slice";
 
-export const ProductItem = ({
-  id,
-  productName,
-  description,
-  category,
-  unitPrice,
-  imageUrl,
-}: Item) => {
+export const ProductItem = (props: Item) => {
+  const { id, productName, description, category, unitPrice, imageUrl } = props;
+  const dispatch = useAppDispatch();
+
+  const handleOnClick = () => {
+    dispatch(
+      addToCart({
+        id,
+        productName,
+        description,
+        category,
+        unitPrice,
+        imageUrl,
+      })
+    );
+  };
+
   return (
     <Card
       sx={{
@@ -70,7 +81,11 @@ export const ProductItem = ({
               >
                 ₱ {numeral(unitPrice).format("0,0.00")}
               </Typography>
-              <Button variant="contained" sx={{ margin: 2 }}>
+              <Button
+                variant="contained"
+                sx={{ margin: 2 }}
+                onClick={handleOnClick}
+              >
                 Add to cart
               </Button>
             </Stack>
