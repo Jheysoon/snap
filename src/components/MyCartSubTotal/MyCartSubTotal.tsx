@@ -14,7 +14,13 @@ export const MyCartSubTotal = () => {
 
   const totalAmount = useMemo(() => {
     return items.reduce((accumulator, currentValue) => {
-      return accumulator + currentValue.unitPrice; // @TODO multiply by quantity
+      return accumulator + currentValue.unitPrice * currentValue.quantity;
+    }, 0);
+  }, [items]);
+
+  const sumQuantity = useMemo(() => {
+    return items.reduce((accumulator, currentValue) => {
+      return accumulator + currentValue.quantity;
     }, 0);
   }, [items]);
 
@@ -27,9 +33,7 @@ export const MyCartSubTotal = () => {
               <Typography sx={{ fontWeight: "bold" }}>Total Items:</Typography>
             </TableCell>
             <TableCell component="th" scope="row">
-              <Typography sx={{ fontWeight: "bold" }}>
-                {items.length}
-              </Typography>
+              <Typography sx={{ fontWeight: "bold" }}>{sumQuantity}</Typography>
             </TableCell>
           </TableRow>
           <TableRow>

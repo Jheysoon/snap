@@ -1,19 +1,23 @@
+import AddIcon from "@mui/icons-material/Add";
+import CloseIcon from "@mui/icons-material/Close";
+import RemoveIcon from "@mui/icons-material/Remove";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import Fab from "@mui/material/Fab";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
-import Fab from "@mui/material/Fab";
-import CloseIcon from "@mui/icons-material/Close";
+import Typography from "@mui/material/Typography";
 import numeral from "numeral";
 
-import { CartItem } from "../../types/cartItem";
+import {
+  addQuantity,
+  removeItem,
+  subractQuantity,
+} from "../../redux/cartSlice/slice";
 import { useAppDispatch } from "../../redux/hooks";
-import { removeItem } from "../../redux/cartSlice/slice";
+import { CartItem } from "../../types/cartItem";
 
 type Props = {
   item: CartItem;
@@ -28,6 +32,17 @@ export const MyCartItem = ({ item }: Props) => {
         id,
       })
     );
+  };
+
+  const handleAddQuantity = () => {
+    dispatch(addQuantity(item.id));
+  };
+
+  const handleSubractQuantity = () => {
+    // should i remove it when quantity is zero ?
+    if (item.quantity > 1) {
+      dispatch(subractQuantity(item.id));
+    }
   };
 
   return (
@@ -61,14 +76,14 @@ export const MyCartItem = ({ item }: Props) => {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <IconButton>
+                  <IconButton onClick={handleAddQuantity} size="small">
                     <AddIcon />
                   </IconButton>
                 </InputAdornment>
               ),
               endAdornment: (
                 <InputAdornment position="end">
-                  <IconButton>
+                  <IconButton onClick={handleSubractQuantity} size="small">
                     <RemoveIcon />
                   </IconButton>
                 </InputAdornment>
@@ -77,7 +92,7 @@ export const MyCartItem = ({ item }: Props) => {
             value={item.quantity}
             variant="outlined"
             size="small"
-            sx={{ width: 130, textAlign: "center" }}
+            sx={{ width: 150, textAlign: "center" }}
           />
         </CardContent>
       </Card>
