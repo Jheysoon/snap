@@ -1,5 +1,3 @@
-# snap
-
 ## Setup
 
 ```ssh
