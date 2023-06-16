@@ -7,12 +7,12 @@ const productsSlice = createSlice({
   name: "products",
   initialState: INITIAL_STATE,
   reducers: {
-    filterList: (state, action: PayloadAction<Item[]>) => {
+    setProducts: (state, action: PayloadAction<Item[]>) => {
       state.list = action.payload;
     },
     resetList: () => INITIAL_STATE,
   },
 });
 
-export const { filterList, resetList } = productsSlice.actions;
+export const { setProducts, resetList } = productsSlice.actions;
 export default productsSlice;
