@@ -1,11 +1,10 @@
-import { SearchTextField, ProductItem, MyCart } from "../../components";
-import Grid from "@mui/material/Unstable_Grid2";
+import { SearchTextField, ProductItem } from "../../components";
+import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import { useAppSelector } from "../../redux/hooks";
 
-import { Item } from "../../redux/productsSlice/types";
+import { Item } from "../../types/item";
 
 export const Home = () => {
   const { list } = useAppSelector((state) => state.product);
@@ -17,7 +16,7 @@ export const Home = () => {
     >
       <Toolbar />
       <Grid container spacing={2}>
-        <Grid xs={12}>
+        <Grid item xs={12}>
           <Box sx={{ mx: 8 }}>
             <SearchTextField />
             {list.map((product: Item) => (

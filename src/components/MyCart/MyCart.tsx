@@ -15,7 +15,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { useAppSelector } from "../../redux/hooks";
 import { CartItem } from "../../types/cartItem";
 import { useAppDispatch } from "../../redux/hooks";
-import { resetCartList } from "../../redux/cartSlice/slice";
+import { resetCartList, removeItem } from "../../redux/cartSlice/slice";
 
 const drawerWidth = 400;
 
@@ -25,6 +25,14 @@ export const MyCart = () => {
 
   const handleClearCart = () => {
     dispatch(resetCartList());
+  };
+
+  const handleRemoveItemInCart = (id: string) => {
+    dispatch(
+      removeItem({
+        id,
+      })
+    );
   };
 
   return (
@@ -59,7 +67,13 @@ export const MyCart = () => {
 
           {items.map((item: CartItem, index) => (
             <Box key={index}>
-              <Button variant="contained" sx={{ marginBottom: -10 }}>
+              <Button
+                variant="contained"
+                sx={{ marginBottom: -10 }}
+                onClick={() => {
+                  handleRemoveItemInCart(item.id);
+                }}
+              >
                 X
               </Button>
               <Card sx={{ margin: 1, display: "flex" }}>

@@ -17,9 +17,16 @@ const cartSlice = createSlice({
 
       state.items = item;
     },
+    removeItem: (state, action: PayloadAction<{ id: string }>) => {
+      const idxObj = state.items.findIndex((item) => {
+        return item.id === action.payload.id;
+      });
+
+      state.items.splice(idxObj, 1);
+    },
     resetCartList: () => INITIAL_STATE,
   },
 });
 
-export const { addToCart, resetCartList } = cartSlice.actions;
+export const { addToCart, resetCartList, removeItem } = cartSlice.actions;
 export default cartSlice;
