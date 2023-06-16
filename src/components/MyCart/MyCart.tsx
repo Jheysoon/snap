@@ -11,6 +11,8 @@ import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import Fab from "@mui/material/Fab";
+import CloseIcon from "@mui/icons-material/Close";
 
 import { useAppSelector } from "../../redux/hooks";
 import { CartItem } from "../../types/cartItem";
@@ -67,15 +69,16 @@ export const MyCart = () => {
 
           {items.map((item: CartItem, index) => (
             <Box key={index}>
-              <Button
-                variant="contained"
-                sx={{ marginBottom: -10 }}
+              <Fab
+                size="small"
+                color="primary"
                 onClick={() => {
                   handleRemoveItemInCart(item.id);
                 }}
+                sx={{ marginBottom: -10 }}
               >
-                X
-              </Button>
+                <CloseIcon />
+              </Fab>
               <Card sx={{ margin: 1, display: "flex" }}>
                 <img
                   style={{
