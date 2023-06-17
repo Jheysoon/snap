@@ -9,13 +9,23 @@ const cartSlice = createSlice({
   initialState: INITIAL_STATE,
   reducers: {
     addToCart: (state, action: PayloadAction<Item>) => {
-      const item: CartItem[] = [{ quantity: 1, ...action.payload }];
-
-      state.items.forEach((record) => {
-        item.push(record);
+      const index = state.items.findIndex((item) => {
+        return item.id === action.payload.id;
       });
 
-      state.items = item;
+      if (index === -1) {
+        const item: CartItem[] = [
+          { quantity: 1, ...action.payload },
+          ...state.items,
+        ];
+
+        state.items = item;
+      }
+
+      if (index !== -1) {
+        // just increment the quantity when a duplicate product selected
+        state.items[index].quantity = ++state.items[index].quantity;
+      }
     },
     removeItem: (state, action: PayloadAction<{ id: string }>) => {
       const index = state.items.findIndex((item) => {
