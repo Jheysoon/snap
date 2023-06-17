@@ -1,6 +1,5 @@
 import InventoryIcon from "@mui/icons-material/Inventory";
 import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -11,8 +10,7 @@ import Toolbar from "@mui/material/Toolbar";
 import setCategoryAndFilter from "../../actions/setCategoryAndFilter";
 import products from "../../assets/items.json";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-
-const drawerWidth = 240;
+import { StyledDrawer } from "./styles";
 
 const CATEGORIES = ["all", ...new Set(products.map((item) => item.category))];
 
@@ -26,41 +24,29 @@ export const AppDrawer = () => {
   };
 
   return (
-    <>
-      <Drawer
-        variant="permanent"
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          [`& .MuiDrawer-paper`]: {
-            width: drawerWidth,
-            boxSizing: "border-box",
-          },
-        }}
-      >
-        <Toolbar />
-        <Box sx={{ overflow: "auto" }}>
-          <List>
-            {CATEGORIES.map((text) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton
-                  selected={text === filters.category}
-                  onClick={() => {
-                    handleSelectCategory(text);
-                  }}
-                >
-                  <ListItemIcon>
-                    <InventoryIcon />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={text === "all" ? "All Categories" : text}
-                  />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-        </Box>
-      </Drawer>
-    </>
+    <StyledDrawer variant="permanent">
+      <Toolbar />
+      <Box sx={{ overflow: "auto" }}>
+        <List>
+          {CATEGORIES.map((text) => (
+            <ListItem key={text} disablePadding>
+              <ListItemButton
+                selected={text === filters.category}
+                onClick={() => {
+                  handleSelectCategory(text);
+                }}
+              >
+                <ListItemIcon>
+                  <InventoryIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary={text === "all" ? "All Categories" : text}
+                />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      </Box>
+    </StyledDrawer>
   );
 };

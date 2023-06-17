@@ -14,15 +14,13 @@ export const SuccessDialog = ({ open, setOpen }: Props) => {
   };
 
   return (
-    <>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Thank you for purchasing</DialogTitle>
-        <DialogActions>
-          <Button onClick={handleClose} autoFocus>
-            OK
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </>
+    <Dialog open={open} onClose={handleClose}>
+      <DialogTitle>Thank you for purchasing</DialogTitle>
+      <DialogActions>
+        <Button onClick={handleClose} autoFocus>
+          OK
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 };

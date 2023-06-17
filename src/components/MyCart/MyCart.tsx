@@ -85,6 +85,10 @@ export const MyCart = () => {
               </Button>
             </>
           )}
+
+          {items.length == 0 && (
+            <Typography sx={{ textAlign: "center" }}>No items added</Typography>
+          )}
         </Box>
       </Drawer>
     </>
